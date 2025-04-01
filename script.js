@@ -11,7 +11,7 @@ function addTask() {
     li.appendChild(getCross());
   }
   inputBox.value = "";
-
+  saveData();
   function getTaskFromInputBox() {
     let li = document.createElement("li");
     li.innerHTML = inputBox.value;
@@ -32,6 +32,17 @@ listContainer.addEventListener(
     } else if (e.target.tagName === "SPAN") {
       e.target.parentElement.remove();
     }
+    saveData();
   },
   false
 );
+
+function saveData() {
+  localStorage.setItem("data", listContainer.innerHTML);
+}
+
+function loadData() {
+  listContainer.innerHTML = localStorage.getItem("data");
+}
+
+loadData();
